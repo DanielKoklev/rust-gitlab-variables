@@ -1,5 +1,5 @@
 
-# GitLab Pipeline Gitlab Token
+# Rust Pipeline Variables Manager
 
 A Rust tool to manage GitLab pipeline variables across multiple projects. This tool allows you to update the `GITLAB_ACCESS_TOKEN` variable for projects where you have maintainer access.
 I also intend to add additional functionality for the user to be able to pass which variable should be updated, which will be more convenient.
