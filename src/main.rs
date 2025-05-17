@@ -5,8 +5,17 @@ use clap::Parser;
 
 #[derive(Parser)]
 struct Options {
+   #[clap(short = 't', long = "token")]
+   /// Gitlab Token 
+    gitlab_token: String,
+
+   /// Pipeline variable to update
+   #[clap(short = 'v', long = "variable")]
+    pipeline_variable: String,
+
+   /// New content to update the variable with
    #[clap(short, long)]
-   gitlab_token: String, 
+    new_value: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -38,6 +47,9 @@ struct PipelineVariable {
 async fn main() -> Result<(), Box<dyn Error>> {
     let options = Options::parse(); 
     let token = &options.gitlab_token;
+    let passed_variable = &options.pipeline_variable;
+    let passed_new_value = &options.new_value;
+
     let gitlab_url = "https://gitlab.com/api/v4";
 
     let client = reqwest::Client::new();
@@ -53,13 +65,13 @@ async fn main() -> Result<(), Box<dyn Error>> {
         if let Some(access) = project.permissions.project_access {
             if access.access_level >= 40 { // Maintainer access level
                 let variable = PipelineVariable {
-                    key: "GITLAB_ACCESS_TOKEN".to_string(),
-                    value: token.to_string(),
+                    key: passed_variable.to_string(),
+                    value: passed_new_value.to_string(),
                     variable_type: "env_var".to_string(),
                 };
 
                 let update_response = client
-                    .put(format!("{}/projects/{}/variables/GITLAB_ACCESS_TOKEN", gitlab_url, project.id))
+                    .put(format!("{}/projects/{}/variables/{}", gitlab_url, project.id, passed_variable))
                     .bearer_auth(token)
                     .header(header::CONTENT_TYPE, "application/json")
                     .json(&variable)
@@ -67,12 +79,11 @@ async fn main() -> Result<(), Box<dyn Error>> {
                     .await?;
 
                 if update_response.status().is_success() {
-                    println!("Updated GITLAB_ACCESS_TOKEN for project: {}", project.name);
+                    println!("Updated variable {} for project: {}", passed_variable, project.name);
                 } else {
                     let error_details = update_response.text().await?;
-                    println!("Failed to update GITLAB_ACCESS_TOKEN for project: {}, \n{}", project.name, error_details);
+                    println!("Failed to update variable {} for project: {}, \n{}", passed_variable, project.name, error_details);
                 }
-                println!("Token: {}", &token);
             }
         }
     }
