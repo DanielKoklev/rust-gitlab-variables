@@ -2,7 +2,7 @@
 # Rust Pipeline Variables Manager
 
 A Rust tool to manage GitLab pipeline variables across multiple projects. This tool allows you to update the pipeline variables with new content.
-**Please be advised that all of the projects will be scanned if you provide Personal Access Token. To update variable at specific project please use Project Access Token.
+**Please be advised that all of the projects will be scanned if you provide Personal Access Token. To update variable at specific project please use Project Access Token.**
 ## Overview
 This tool lists all the projects that can be accessed with the provided gitlab token and updates the given variable with the new content.
 ## Features
