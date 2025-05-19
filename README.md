@@ -24,8 +24,8 @@ This tool lists all the projects that can be accessed with the provided gitlab t
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/DanielKoklev/rust-gitlab-token.git
-   cd rust-gitlab-token
+   git clone https://github.com/DanielKoklev/rust-gitlab-variables.git
+   cd rust-gitlab-variables
    ```
 
 2. Run the tool:
@@ -39,5 +39,5 @@ This tool lists all the projects that can be accessed with the provided gitlab t
     ```
     And then execute it via:
     ```bash
-    ./targets/release/rust-gitlab-tokens -t <token> -v <variable-to-update> -n <new-content-for-the-variable> 
+    ./targets/release/rust-gitlab-variables -t <token> -v <variable-to-update> -n <new-content-for-the-variable> 
     ```
