@@ -33,4 +33,11 @@ This tool lists all the projects that can be accessed with the provided gitlab t
    ```bash
    cargo run -- -t <token> -v <variable-to-update> -n <new-content-for-the-variable>
    ```
-
+3. Or you can build it with:
+    ```bash
+    cargo build 
+    ```
+    And then execute it via:
+    ```bash
+    ./targets/release/rust-gitlab-tokens -t <token> -v <variable-to-update> -n <new-content-for-the-variable> 
+    ```
