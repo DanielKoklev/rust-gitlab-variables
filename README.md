@@ -17,7 +17,8 @@ This tool lists all the projects that can be accessed with the provided gitlab t
 
 - Rust (latest stable version)
 - Cargo (Rust's package manager)
-- GitLab Personal Access Token / Project Access Token with `maintainer` or `owner` access
+- GitLab Personal Access Token - If you provide this kind of token you need to be `mainaner` or `owner` of the repo where you want to update the variable and also you need to to have API permissions when creating the token
+- Project Access Token - you need to provide API permission for the said token.
 
 ### Installation
 
